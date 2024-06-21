@@ -1,0 +1,23 @@
+		;R5		stores #of ints copied X20 is ArrayA X21 is ArrayB
+arrayA	DCD		5,7,2,1,8,3,9,13,0,2,5
+arrayB	DCD		0,0,0,0,0,0,0,0,0,0,0
+		MOV		R3, #256 ;ArrayA
+		MOV		R4, #296 ;ArrayB
+		ADD		R5,R0,#0	;Setting count for loop
+		ADD		R11,R0,#0 ;Copycount
+Loop		SUBS		R0,R5,#11 ;Comparing I to max
+		BGE		Leave ;If equal go to leave
+		
+		LSL		R6,R5,#2 ;X8 is storage for shift for next loop
+		ADD		R6,R3,R6 ;Adding shift to ArrayA element register
+		LDR		R7,[R6,#0]	;Loading in first location of array A
+		STR		R7,[R6,#0]	;Storing number copied from ArrayA in array B element
+		SUBS		R0,R7,#0		;Comparing current integer to 0
+		BEQ		Zerofound ;Exiting loop and not increasing copy count
+		ADD		R5,R5,#1 ;Incrementing var for loop
+		ADD		R11,R11,#1 ;Increasing copycount
+		B		Loop
+Leave
+		
+Zerofound
+		

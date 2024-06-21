@@ -1,0 +1,26 @@
+arrayA		DCD		1,2,0,0,0,0,0
+			;Num1	R2
+			;Num2	R3
+			;I		R4
+			;I+1		R5
+			;I+2		R6
+			MOV		R1,#256 ;Setting up A at 256 on register 1
+			ADD		R4,R0,#0 ;Initialize i
+loop
+			SUBS		R12,R4,#6
+			BGE		Exit
+			LSL		R9,R4,#2 ;Multiplying i*4 and storing it in R9
+			ADD		R9,R9,R1 ;Adding base address of A
+			ADD		R5,R9,#4 ;I+1 setup
+			ADD		R6,R5,#4 ;I+2
+			LDR		R2,[R9,#0] ;Array[i]
+			LDR		R3,[R5,#0] ;Array[i+1]
+			BL		myfunction
+			STR		R7,[R6,#0] ;Storing output into i+2
+			ADD		R4,R4,#1 ;I++
+			B		loop
+myfunction
+			SUB		R7,R2,R3  ;R7 is storing the returned number
+			LSL		R7,R7,#2 ;Multiply R7 by 4
+			MOV		PC,LR ;return function
+Exit

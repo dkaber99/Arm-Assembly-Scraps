@@ -1,0 +1,10 @@
+		;		A[0] = A[1] + A[2] - A[3]
+		
+ArrayA	DCD		1,2,3
+		ADD		R1,R1,#256 ;A[0]
+		LDR		R2, [R1,#4] ;A[1]
+		LDR		R3, [R1,#8] ;A[2]
+		LDR		R4, [R1,#12] ;A[3]
+		ADD		R2,R2,R3
+		SUB		R1,R2,R4
+		

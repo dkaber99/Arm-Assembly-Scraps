@@ -1,0 +1,9 @@
+Loop		SUBS		R0,R12,#10
+		BGT		exit
+		SUBS		R0,R12,#5
+		BLT		Skipper
+		ADD		R9,R10,R11
+Skipper	SUB		R9,R10,R11
+		ADD		R12,R12,#1
+		B		Loop
+exit
