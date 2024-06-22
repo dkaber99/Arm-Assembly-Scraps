@@ -1,0 +1,7 @@
+ArrayA	DCD		1,2,3,4
+		ADD		R1,R1, #256 ;A[0]
+		LDR		R2,[R1,#4] ;A[1]
+		LDR		R3,[R1,#8] ;A[2]
+		LDR		R4,[R3,#4];A[3]
+		SUB		R3,R3,R4
+		ADD		R1,R2,R3
